@@ -13,7 +13,6 @@ object SparkApp {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession
       .builder
-      .master("local")
       .appName("BGCTest")
       .getOrCreate()
 
