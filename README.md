@@ -2,18 +2,18 @@
 
 [Follow this article to find more detailed instructions.](https://nosqlnocry.wordpress.com/2015/02/27/how-to-build-a-spark-fat-jar-in-scala-and-submit-a-job/)
 
-Modify the class "MainExample.scala" writing your Spark code, then compile the project with the command:
+A Simple Spark application that reads below files from given path
 
-```mvn clean package```
+name.basics.tsv.gz title.akas.tsv.gz title.basics.tsv.gz title.crew.tsv.gz title.episode.tsv.gz title.principals.tsv.gz title.ratings.tsv.gz
 
-Inside the ```/target``` folder you will find the result fat jar called ```spark-scala-maven-project-0.0.1-SNAPSHOT-jar-with-depencencies.jar```. In order to launch the Spark job use this command in a shell with a configured Spark environment:
+Deployment Guide:
 
-    spark-submit --class com.examples.MainExample \
-      --master yarn-cluster \
-      spark-scala-maven-project-0.0.1-SNAPSHOT-jar-with-depencencies.jar \
-      inputhdfspath \
-      outputhdfspath
+git clone cd spark-example-project mvn clean install Goto the spark installation directory
 
-The parameters ```inputhdfspath``` and ```outputhdfspath``` don't have to present the form ```hdfs://path/to/your/file``` but directly ```/path/to/your/files/``` because submitting a job the default file system is HDFS. To retrieve the result locally:
+submit the application in local mode by using below command please put the actual path for application jar and input file
 
-    hadoop fs -getmerge outputhdfspath resultSavedLocally
+./bin/spark-submit --class com.bgc.SparkApp --master local bgc-spark-project-0.0.1-SNAPSHOT.jar /input/file/path/
+
+If the cluster is running YARN, you can replace "--master local" with "--master yarn".
+
+The result will be displayed on the console.
